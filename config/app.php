@@ -2,7 +2,7 @@
 
 // Informations sur l'application
 define('APP_NAME', 'Jungle');
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '1.0.0 Beta');
 
 // URL de base du site (à adapter en fonction de votre environnement)
 define('BASE_URL', 'https://monprojet.loc');
