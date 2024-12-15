@@ -90,12 +90,7 @@ body {
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand brand-name" href="#">
-            <svg class="leaf-icon" width="35" height="35" viewBox="0 0 24 24" fill="#064da6" style="margin-right: 10px;">
-                <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.5,3.75"></path>
-            </svg>
-            Jungle
-        </a>
+        <a class="navbar-brand brand-name" href="#">Jungle</a>
         
         <button id="login-btn" class="login-btn rounded-circle">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="#064da6">
