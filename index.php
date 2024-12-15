@@ -97,7 +97,7 @@ $routes = [
     'admin' => 'include/components/admin_dashboard.php',
 ];
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING) ?: 'home';
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?: 'home';
 $routeFile = $routes[$action] ?? null;
 
 if ($routeFile) {
