@@ -26,6 +26,7 @@
 include_header();
 ?>
 <div class="container full-screen bg-sky-900">
+<div id="dynamic-card"><?php include_card();?></div>
     <div id="dynamic-content"></div> <!-- Conteneur pour le contenu dynamique -->
 </div>
 
