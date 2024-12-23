@@ -4,112 +4,98 @@ defined('API_EXEC') or die(http_response_code(500));
 
 <!-- Styles spécifiques au composant -->
 <style scoped>
-#login-component {
-    background: rgba(255, 255, 255, 0.23) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 6px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    padding: 30px;
-    max-width: 500px;
-    margin: auto;
-    color: #064da6 !important;
+.glass-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  transition: all 0.3s ease-in-out;
 }
-#login-component h2 {
-    font-size: 1.8rem;
-    color: #064da6;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
-#login-component .form-label {
-    font-weight: bold;
-    color: #FCC737 !important;
-    margin-bottom: 5px;
-    display: block;
+
+.input-style {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
-#login-component input[type="email"],
-#login-component input[type="password"] {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid rgba(200, 200, 200, 0.5);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-#login-component input[type="email"]:focus,
-#login-component input[type="password"]:focus {
-    border-color: #FCC737;
-    box-shadow: 0 0 8px rgba(252, 199, 55, 0.7);
-    outline: none;
-}
-#login-component .form-check-label {
-    color: rgb(225, 219, 204) !important;
-    font-size: 0.9rem;
-    margin-left: 5px;
-}
-#login-component button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #064da6;
-    border: none;
-    border-radius: 8px;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-#login-component button:hover {
-    background-color: #8C3061;
-    transform: scale(1.02);
+
+.input-style:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 </style>
 
 <!-- Composant HTML -->
-<div id="login-component" class="rounded-lg shadow-md p-4 max-w-lg w-full mx-auto bg-white">
-    <h2 class="text-center mb-6 text-[#064da6] font-bold text-2xl">Connexion</h2>
-    <form id="login-form" method="POST" class="space-y-6">
-        <div>
-            <label for="email" class="block  text-[#1E201E] mb-2">Adresse Email</label>
-            <input 
-                type="email" 
-                class="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FCC737]" 
-                id="email" 
-                name="email" 
-                placeholder="Entrez votre email" 
-                required
-            >
-        </div>
-        <div>
-            <label for="password" class="block  text-[#1E201E] mb-2">Mot de passe</label>
-            <input 
-                type="password" 
-                class="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FCC737]" 
-                id="password" 
-                name="password" 
-                placeholder="Entrez votre mot de passe" 
-                required
-            >
-        </div>
+<div class="glass-card p-8 w-full max-w-md">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Welcome Back</h2>
+      <p class="text-gray-600 mt-2">Please sign in to continue</p>
+    </div>
+
+    <form class="space-y-6" method="post" action="https://example.com/login">
+      <div>
+        <label class="block text-gray-700 text-sm font-semibold mb-2" for="email">
+          Email Address
+        </label>
+        <input 
+          class="input-style w-full px-4 py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+        />
+      </div>
+
+      <div>
+        <label class="block text-gray-700 text-sm font-semibold mb-2" for="password">
+          Password
+        </label>
+        <input 
+          class="input-style w-full px-4 py-3 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+
+      <div class="flex items-center justify-between">
         <div class="flex items-center">
-            <input 
-                type="checkbox" 
-                class="mr-2 accent-[#FCC737]" 
-                id="remember-me" 
-                name="remember-me"
-            >
-            <label for="remember-me" class="text-gray-700">Se souvenir de moi</label>
+          <input 
+            type="checkbox" 
+            id="remember"
+            name="remember"
+            class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+          />
+          <label for="remember" class="ml-2 block text-sm text-gray-700">
+            Remember me
+          </label>
         </div>
-        <div>
-            <button 
-                type="submit" 
-                class="bg-[#FCC737] text-white  py-3 px-4 rounded-lg hover:bg-[#e0b835] transition-all"
-            >
-                Se Connecter
-            </button>
-        </div>
+        <a href="https://example.com/forgot-password" class="text-sm text-purple-600 hover:text-purple-500">
+          Forgot password?
+        </a>
+      </div>
+
+      <button 
+        type="submit" 
+        class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors duration-200 font-semibold"
+      >
+        Sign In
+      </button>
+
+      <div class="text-center mt-4">
+        <span class="text-gray-600 text-sm">Don't have an account?</span>
+        <a href="https://example.com/signup" class="text-purple-600 hover:text-purple-500 text-sm font-semibold ml-1">
+          Sign up
+        </a>
+      </div>
     </form>
 </div>
 

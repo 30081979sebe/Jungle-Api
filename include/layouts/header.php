@@ -24,6 +24,13 @@ defined('API_EXEC') or die(http_response_code(500));
         <script src="public/assets/main.js"></script>
 
 <style scoped>
+.glass-nav {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.31);
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  transition: all 0.3s ease-in-out;
+}
 .leaf-icon {
     animation: float 3s ease-in-out infinite;
 }
@@ -49,9 +56,9 @@ body {
 </style>
 </head>
 <body class="min-h-screen">
-<nav class="backdrop-blur-md shadow-md border-b border-black/20 bg-white/10 py-4">
+<nav class="backdrop-blur-md glass-nav py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
-        <a class="text-teal-600 text-2xl font-serif font-bold tracking-wider flex items-center" href="#">
+        <a class="text-gray-800 text-2xl font-serif font-bold tracking-wider flex items-center" href="#">
             <svg class="leaf-icon w-9 h-9 mr-2" fill="#118B50" viewBox="0 0 24 24">
                 <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.5,3.75"></path>
             </svg>
