@@ -7,14 +7,13 @@ un point d'entrée principal : index.php, pour gérer le routage des requêtes.
 Jai commencé à structurer le projet autour d'un système de contrôle modulaire (via les contrôleurs et les vues).
 
 Authentification :
-Une gestion de l'authentification est présente via le fichier ajax/handle_login.php et le contrôleur AuthController.php.
-Une vue loginform.php existe, pour le formulaire de connexion.
+Une gestion de l'authentification est présente via le fichierloginform.php et index.php.
 
 Tableaux de bord :
 Des tableaux de bord pour différents types d'utilisateurs (admin_dashboard.php, user_dashboard.php) sont présents dans les vues.
 
 Structure et modularité :
-Séparation des modèles (UserModel.php), les contrôleurs, les vues et les configurations. organisation en MVC (Modèle-Vue-Contrôleur).
+Séparation des pages (home.php), les layouts, les vues et les configurations. organisation en gestion dynamique.
 Les ressources front-end (CSS, JS) sont centralisées dans public/assets.
 
 Gestion des composants :
