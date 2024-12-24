@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Appel AJAX
         fetch('index.php?action=submit_login', {
             method: 'POST',
-            body: formData
+            body: new FormData(document.getElementById('login-form'))
         })
             .then(response => response.json())
             .then(data => {

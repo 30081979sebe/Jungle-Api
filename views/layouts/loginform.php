@@ -39,7 +39,7 @@ defined('API_EXEC') or die(http_response_code(500));
       <p class="text-white mt-2">Se Connecter</p>
     </div>
     <div id="login-error" class="text-red-500 mt-4 text-center hidden"><!-- Le message d'erreur s'affichera ici --></div>
-    <form class="space-y-6" method="post" action="index.php?action=submit_login">
+    <form class="space-y-6" id="login-form" method="post" action="index.php?action=submit_login">
       <div>
         <label class="block text-white text-sm font-semibold mb-2" for="email">
           Email
