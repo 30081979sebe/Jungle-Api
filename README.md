@@ -7,7 +7,7 @@ un point d'entrée principal : index.php, pour gérer le routage des requêtes.
 Jai commencé à structurer le projet autour d'un système de contrôle modulaire (via les contrôleurs et les vues).
 
 Authentification :
-Une gestion de l'authentification est présente via le fichierloginform.php et index.php.
+Une gestion de l'authentification est présente via le fichier loginform.php et index.php.
 
 Tableaux de bord :
 Des tableaux de bord pour différents types d'utilisateurs (admin_dashboard.php, user_dashboard.php) sont présents dans les vues.
