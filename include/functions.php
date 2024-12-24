@@ -23,12 +23,11 @@ function get_db_connection() {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            die('Erreur : ' . $e->getMessage());
+            throw new PDOException('Erreur : ' . $e->getMessage());
         }
     }
     return $pdo;
 }
-
 /**
  * Vérifie si un utilisateur est connecté
  *
@@ -157,59 +156,15 @@ function remove_compagny($company_id) {
 }
 
 /**
- * Inclut le fichier du projet à la maison
+ * Inclut dynamiquement des fichiers de layout
  */
-function include_home() {
-    include PATH_BASE . 'include/home.php';
-}
-
-/**
- * Inclut le fichier header
- */
-function include_header() {
-    include PATH_BASE . 'include/layouts/header.php';
-}
-
-/**
- * Inclut le fichier header du tableau de bord
- */
-function include_headerdashboard(){
-    include PATH_BASE.'include/layouts/headerdashboard';
-}
-
-/**
- * Inclut le fichier footer
- */
-function include_footer() {
-    include PATH_BASE . 'include/layouts/footer.php';
-}
-
-/**
- * Inclut le fichier card
- */
-function include_card() {
-    include PATH_BASE . 'include/layouts/card.php';
-}
-
-/**
- * Inclut le formulaire de connexion
- */
-function include_loginform() {
-    include PATH_BASE . 'include/loginform.php';
-}
-
-/**
- * Inclut le tableau de bord admin
- */
-function include_admin_dasboard() {
-    include PATH_BASE . 'include/admin_dasboard.php';
-}
-
-/**
- * Inclut le tableau de bord utilisateur
- */
-function include_user_dasboard() {
-    include PATH_BASE . 'include/user_dasboard.php';
+function include_layout($layout) {
+    $path = PATH_ROOT . 'Views/layouts/' . $layout . '.php';
+    if (file_exists($path)) {
+        include $path;
+    } else {
+        echo "Layout not found: $layout";
+    }
 }
 
 ?>

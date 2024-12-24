@@ -17,13 +17,18 @@ defined('API_EXEC') or die(http_response_code(500));
         <title><?php ?></title>
         <meta name="description" content="<?php ?>">
 
-        <!-- Tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
-
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+         <!-- Tailwind CSS CDN -->
+         <script src="https://cdn.tailwindcss.com"></script>
         <script src="public/assets/main.js"></script>
+        <script src="public/assets/jquery.js"></script>
 
 <style scoped>
+.glass-nav {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
 .leaf-icon {
     animation: float 3s ease-in-out infinite;
 }
@@ -49,9 +54,9 @@ body {
 </style>
 </head>
 <body class="min-h-screen">
-<nav class="backdrop-blur-md shadow-md border-b border-black/20 bg-white/10 py-4">
+<nav class="glass-nav py-4 sticky top-0 z-10 text-white">
     <div class="container mx-auto flex justify-between items-center px-4">
-        <a class="text-teal-600 text-2xl font-serif font-bold tracking-wider flex items-center" href="#">
+        <a class="text-white text-2xl font-serif font-bold tracking-wider flex items-center" href="#">
             <svg class="leaf-icon w-9 h-9 mr-2" fill="#118B50" viewBox="0 0 24 24">
                 <path d="M17,8C8,10,5.9,16.17,3.82,21.34L5.71,22l1-2.3A4.49,4.49,0,0,0,8,20C19,20,22,3,22,3,21,5,14,5.25,9,6.25S2,11.5,2,13.5a6.23,6.23,0,0,0,1.5,3.75"></path>
             </svg>

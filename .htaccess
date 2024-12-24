@@ -1,0 +1,36 @@
+# Activer le moteur de réécriture
+RewriteEngine On
+
+# Base du répertoire
+RewriteBase /
+
+# Redirection des requêtes vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(env|htaccess)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(php|html|htm|js|css)$">
+    Require all granted
+</FilesMatch>
+
+# Compression des fichiers pour améliorer les performances
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache-Control pour les fichiers statiques
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|js|css|woff|woff2|ttf|svg|eot)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+</IfModule>
+
+# Gestion des erreurs
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+
