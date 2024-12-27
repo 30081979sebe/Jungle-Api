@@ -13,7 +13,8 @@ function set_remember_me_cookie(string $email, bool $remember_me): void {
             'path' => '/',
             'secure' => true,
             'httponly' => true,
-            'samesite' => 'Strict'
+            'samesite' => 'Strict',
+            'domain' => null
         ]);
     } else {
         clear_remember_me_cookie();
@@ -29,7 +30,8 @@ function clear_remember_me_cookie(): void {
         'path' => '/',
         'secure' => true,
         'httponly' => true,
-        'samesite' => 'Strict'
+        'samesite' => 'Strict',
+        'domain' => null
     ]);
 }
 
@@ -43,4 +45,3 @@ function get_remember_me_cookie(): ?string {
 }
 
 ?>
-
