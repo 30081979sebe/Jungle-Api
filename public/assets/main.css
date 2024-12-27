@@ -1,1 +1,50 @@
+/* 
+ * .elegant-button
+ * 
+ * Cette classe stylise un bouton avec un effet de transition fluide et un arrière-plan semi-transparent.
+ * 
+ * Properties:
+ * - transition : Applique un effet de transition sur toutes les propriétés sur une durée de 0,3 seconde avec une fonction de timing ease.
+ * - background : Définit une couleur d'arrière-plan semi-transparente blanche (rgba(255, 255, 255, 0.1)).
+ * - border : Définit une bordure avec une ligne pleine légèrement transparente (rgba(255, 255, 255, 0.2)).
+ */
+.elegant-button {
+    transition: all 0.3s ease;
+    background: rgba(17, 90, 191, 0.282);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
+/* 
+ * Styles for the elegant button when hovered over.
+ * 
+ * Changes the background color to a semi-transparent white 
+ * and applies a slight upward translation to create a 
+ * hover effect.
+ */
+.elegant-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.glass-card {
+    backdrop-filter: blur(10px);
+    background: rgba(17, 90, 191, 0.282);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.detail-panel.active {
+    right: 0;
+}
+/* Barre latérale */
+.detail-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 300px;
+    height: 100%;
+    background: rgba(17, 90, 191, 0.282);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: right 0.4s ease;
+    color: beige;
+}

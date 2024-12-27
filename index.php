@@ -9,8 +9,6 @@
  * @version_php    min 7.4+
  */
 
-
-
 // Empêche l'accès direct au fichier si la constante EXEC n'est pas définie
 define('API_EXEC', 1) or die('No direct access allowed');
 
@@ -40,12 +38,12 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
 
 // Autoload : Charger les fichiers essentiels
 $autoload_files = [
-    __DIR__ . '/config/app.php',          // Configuration générale
-    __DIR__ . '/config/database.php',    // Paramètres de la base de données
-    __DIR__ . '/config/path.php',        // Définition des chemins
-    __DIR__ . '/include/functions.php',  // Fonctions globales
-    __DIR__ . '/include/queries.php',    // Requêtes centralisées
-    __DIR__ . '/include/cookies.php',    // Gestion des cookies
+    __DIR__ . '/config/app.php',
+    __DIR__ . '/config/database.php',
+    __DIR__ . '/config/path.php',
+    __DIR__ . '/include/functions.php',
+    __DIR__ . '/include/queries.php',
+    __DIR__ . '/include/cookies.php',
 ];
 
 // Vérification de la présence des fichiers essentiels
@@ -62,90 +60,68 @@ $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $routes = [
     'home' => 'views/pages/home.php',
     'login' => 'views/layouts/loginform.php',
+    'logout' => 'views/layouts/loginform.php',
     'user_dashboard' => 'views/pages/user_dashboard.php',
     'admin_dashboard' => 'views/pages/admin_dashboard.php',
 ];
 
 // Récupération de l'action dans l'URL
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_SPECIAL_CHARS) ?: 'home';
-$is_api_request = isset($_GET['api']) && $_GET['api'] == '1'; // Initialisation
 
-// Gestion des méthodes HTTP pour les actions
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if ($action === 'login') {
-        include __DIR__ . '/views/layouts/loginform.php';
-        exit;
-    }
+// Détection des requêtes API (si nécessaire)
+$is_api_request = isset($_GET['api']) && $_GET['api'] == '1';
 
-    if ($action === 'home' && isset($routes['home'])) {
-        include __DIR__ . '/' . $routes['home'];
-        exit;
-    }
-} elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($action === 'submit_login') {
-        header('Content-Type: application/json');
-
-    
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
-    
-        if (empty($email) || empty($password)) {
-            echo json_encode(['success' => false, 'error' => 'Email et mot de passe requis.']);
-            exit;
-        }
-    
-        try {
-            // Hache le mot de passe saisi avec MD5
-            $hashed_password = md5($password);
-    
-            // Vérification dans la table admin
-            $admin = get_admin_by_email($email);
-            if ($admin && $admin['mot_de_passe'] === $hashed_password) {
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-                $_SESSION['user'] = ['id' => $admin['id'], 'role' => 'admin'];
-                echo json_encode(['success' => true, 'redirect' => 'admin_dashboard.php']);
-                exit;
-            }
-    
-            // Vérification dans la table utilisateur
-            $user = get_user_by_email($email);
-            if ($user && $user['mot_de_passe'] === $hashed_password) {
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-                $_SESSION['user'] = ['id' => $user['id'], 'role' => 'user'];
-                echo json_encode(['success' => true, 'redirect' => 'user_dashboard.php']);
-                exit;
-            }
-    
-            echo json_encode(['success' => false, 'error' => 'Email ou mot de passe incorrect.']);
-        } catch (PDOException $e) {
-            error_log("Database connection error: " . $e->getMessage(), 3, __DIR__ . '/logs/errors.log');
-            echo json_encode(['success' => false, 'error' => 'Erreur de connexion. Réessayez plus tard.']);
-        }
-        exit;
-    }
-    
+// Inclusion directe pour les tableaux de bord
+if ($url === 'admin_dashboard.php') {
+    include __DIR__ . '/views/pages/admin_dashboard.php';
+    exit;
+}
+if ($url === 'user_dashboard.php') {
+    include __DIR__ . '/views/pages/user_dashboard.php';
+    exit;
 }
 
-// Inclusion du fichier de route
-if ($routeFile = $routes[$action] ?? null) {
-    $routeFile = realpath(PATH_BASE . '/' . $routeFile);
+// Gestion des actions
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit_login') {
+    // Connexion utilisateur
+    session_start();
 
-    if (strpos($routeFile, realpath(PATH_BASE)) !== 0) {
-        header('HTTP/1.1 403 Forbidden');
-        echo json_encode(['error' => 'Access denied']);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+
+    if (empty($email) || empty($password)) {
+        $_SESSION['error'] = 'Email et mot de passe requis.';
+        header('Location: index.php?action=login');
         exit;
     }
 
+    $response = authenticate_user($email, $password);
+    if ($response['success']) {
+        // Assurez-vous que les variables de session sont définies ici
+        $_SESSION['user_id'] = $response['user']['id'];
+        $_SESSION['user_role'] = $response['user']['role'];
+        header('Location: ' . $response['redirect']);
+        exit;
+    } else {
+        $_SESSION['error'] = $response['error'];
+        header('Location: index.php?action=login');
+        exit;
+    }
+    // Gestion du delog
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'logout') {
+    logout();
+}
+}
+
+
+// Affichage des pages selon les routes définies
+if ($routeFile = $routes[$action] ?? null) {
     if (file_exists($routeFile)) {
         include $routeFile;
     } else {
         error_log("Route not found: {$action}", 3, __DIR__ . '/logs/errors.log');
         http_response_code(404);
         include __DIR__ . '/views/pages/error_404.php';
-        exit;
     }
+    exit;
 }

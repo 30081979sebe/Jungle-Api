@@ -1,46 +1,46 @@
 <?php
 
 /**
- * Définit un cookie sécurisé.
+ * Crée ou met à jour un cookie pour la fonctionnalité "Remember Me".
  *
- * @param string $name Le nom du cookie.
- * @param string $value La valeur du cookie.
- * @param int $expiry Durée en secondes avant l'expiration (par défaut : 7 jours).
+ * @param string $email L'adresse e-mail de l'utilisateur à stocker dans le cookie.
+ * @param bool $remember_me Indique si le cookie doit être créé ou supprimé.
  */
-function set_cookie($name, $value, $expiry = 604800) {
-    setcookie($name, $value, time() + $expiry, '/', $_SERVER['HTTP_HOST'], isset($_SERVER['HTTPS']), true);
-}
-
-/**
- * Récupère un cookie.
- *
- * @param string $name Le nom du cookie.
- * @return string|null La valeur du cookie ou null si le cookie n'existe pas.
- */
-function get_cookie($name) {
-    return $_COOKIE[$name] ?? null;
-}
-
-/**
- * Supprime un cookie.
- *
- * @param string $name Le nom du cookie.
- */
-function delete_cookie($name) {
-    setcookie($name, '', time() - 3600, '/');
-    setcookie($name, '', time() - 3600, '/', $_SERVER['HTTP_HOST']);
-}
-
-/**
- * Efface tous les cookies existants.
- */
-function clear_all_cookies() {
-    if (isset($_SERVER['HTTP_COOKIE'])) {
-        $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-        foreach ($cookies as $cookie) {
-            $parts = explode('=', $cookie);
-            $name = trim($parts[0]);
-            delete_cookie($name); // Utilise la fonction delete_cookie
-        }
+function set_remember_me_cookie(string $email, bool $remember_me): void {
+    if ($remember_me) {
+        setcookie('remember_me', $email, [
+            'expires' => time() + (30 * 24 * 60 * 60), // 30 jours
+            'path' => '/',
+            'secure' => true,
+            'httponly' => true,
+            'samesite' => 'Strict'
+        ]);
+    } else {
+        clear_remember_me_cookie();
     }
 }
+
+/**
+ * Efface le cookie "Remember Me".
+ */
+function clear_remember_me_cookie(): void {
+    setcookie('remember_me', '', [
+        'expires' => time() - 3600,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Strict'
+    ]);
+}
+
+/**
+ * Récupère l'adresse e-mail stockée dans le cookie "Remember Me".
+ *
+ * @return string|null L'adresse e-mail si le cookie existe, null sinon.
+ */
+function get_remember_me_cookie(): ?string {
+    return $_COOKIE['remember_me'] ?? null;
+}
+
+?>
+
