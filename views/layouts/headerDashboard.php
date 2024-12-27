@@ -18,7 +18,8 @@ defined('API_EXEC') or die(http_response_code(500));
         </div>
         <div class="user-info flex items-center gap-4 mx-auto">
         <img src="https://via.placeholder.com/50" alt="Utilisateur" class="rounded-full w-12 h-12">
-        <p><?php get_logged_in_user_name()?></p>
+        <p><?php echo get_logged_in_user_name(); ?></p>
+
         </div>
     </div> 
 
