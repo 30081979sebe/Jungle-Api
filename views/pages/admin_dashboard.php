@@ -37,7 +37,6 @@ if (!is_logged_in()) {
 include_layout('headerDashboard');
 ?>
 <div class="w-screen h-screen bg-sky-900">
-    <div>
     <?php
     include_layout('card_dashboard');
     ?>

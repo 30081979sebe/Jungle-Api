@@ -60,7 +60,7 @@ $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 $routes = [
     'home' => 'views/pages/home.php',
     'login' => 'views/layouts/loginform.php',
-    'logout' => 'views/layouts/loginform.php',
+    'logout' => 'views/pages/home.php',
     'user_dashboard' => 'views/pages/user_dashboard.php',
     'admin_dashboard' => 'views/pages/admin_dashboard.php',
 ];
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit_login') {
     // Gestion du delog
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'logout') {
     logout();
-}
+    }
 }
 
 

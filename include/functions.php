@@ -40,7 +40,6 @@ function check_session_timeout(int $timeout = 1800): void {
 
 //fonction de delog
 function logout() {
-    session_start(); // Assurez-vous que la session est démarrée
     session_unset(); // Détruit toutes les variables de session
     session_destroy(); // Détruit la session elle-même
     header("Location: index.php"); // Redirige vers la page d'accueil ou de login

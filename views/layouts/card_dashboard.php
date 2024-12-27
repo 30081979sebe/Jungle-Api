@@ -8,8 +8,6 @@
 <button class="elegant-button inline-block px-6 py-2 rounded-lg text-white text-sm hover:shadow-lg" id="btnAddClient">Ajouter un client</button>
 <button class="elegant-button inline-block px-6 py-2 rounded-lg text-white text-sm hover:shadow-lg" id="btnAddClient">modifier un client</button>
 <button class="elegant-button inline-block px-6 py-2 rounded-lg text-white text-sm hover:shadow-lg" id="btnAddClient">Supprimer un client</button>
-<form method="post" action="?action=logout">
-<button type="submit">Se déconnecter</button>
 </div>
 
 <!-- Conteneur des toasts -->

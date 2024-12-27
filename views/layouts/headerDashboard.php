@@ -17,8 +17,8 @@ defined('API_EXEC') or die(http_response_code(500));
         <h1 class="text-3xl font-bold mx-auto">Gestion Admin</h1> 
         </div>
         <div class="user-info flex items-center gap-4 mx-auto">
-        <?php get_logged_in_user_name()?>
         <img src="https://via.placeholder.com/50" alt="Utilisateur" class="rounded-full w-12 h-12">
+        <p><?php get_logged_in_user_name()?></p>
         </div>
     </div> 
 
