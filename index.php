@@ -100,6 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'submit_login') {
         // Assurez-vous que les variables de session sont définies ici
         $_SESSION['user_id'] = $response['user']['id'];
         $_SESSION['user_role'] = $response['user']['role'];
+        $_SESSION['user_nom'] = $response['user']['nom'];
+        $_SESSION['user_prenom'] = $response['user']['prenom'];
         header('Location: ' . $response['redirect']);
         exit;
     } else {
