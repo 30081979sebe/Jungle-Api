@@ -9,7 +9,7 @@
 function set_remember_me_cookie(string $email, bool $remember_me): void {
     if ($remember_me) {
         setcookie('remember_me', $email, [
-            'expires' => time() + (30 * 24 * 60 * 60), // 30 jours
+            'expires' => time() + (5 * 60), // 5 minutes
             'path' => '/',
             'secure' => true,
             'httponly' => true,
