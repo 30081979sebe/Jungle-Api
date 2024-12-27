@@ -9,11 +9,12 @@
 function set_remember_me_cookie(string $email, bool $remember_me): void {
     if ($remember_me) {
         setcookie('remember_me', $email, [
-            'expires' => time() + (30 * 24 * 60 * 60), // 30 jours
+            'expires' => time() + (5* 60), // 5minutes
             'path' => '/',
             'secure' => true,
             'httponly' => true,
-            'samesite' => 'Strict'
+            'samesite' => 'Strict',
+            'domain' => null
         ]);
     } else {
         clear_remember_me_cookie();
@@ -29,7 +30,8 @@ function clear_remember_me_cookie(): void {
         'path' => '/',
         'secure' => true,
         'httponly' => true,
-        'samesite' => 'Strict'
+        'samesite' => 'Strict',
+        'domain' => null
     ]);
 }
 

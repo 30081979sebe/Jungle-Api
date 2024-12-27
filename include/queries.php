@@ -41,7 +41,7 @@ function authenticate_user(string $email, string $password): array {
         $admin = get_admin_by_email($email);
         if ($admin && md5($password) === $admin['mot_de_passe']) {
             $response['success'] = true;
-            $response['user'] = ['id' => $admin['id'], 'role' => 'admin'];
+            $response['user'] = ['id' => $admin['id'], 'role' => 'admin', 'nom' => $admin['nom'], 'prenom' => $admin['prenom']];
             $response['redirect'] = 'admin_dashboard.php';
             return $response;
         }
@@ -50,7 +50,7 @@ function authenticate_user(string $email, string $password): array {
         $user = get_user_by_email($email);
         if ($user && md5($password) === $user['mot_de_passe']) {
             $response['success'] = true;
-            $response['user'] = ['id' => $user['id'], 'role' => 'user'];
+            $response['user'] = ['id' => $user['id'], 'role' => 'user', 'nom' => $user['nom'], 'prenom' => $user['prenom']];
             $response['redirect'] = 'user_dashboard.php';
             return $response;
         }
